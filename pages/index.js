@@ -1,6 +1,7 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
+import { checkout } from "../checkout"
 
 export default function Home() {
   return (
@@ -12,34 +13,39 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Buy my phsyical NFTs
-        </h1>
+        <h1 className={styles.title}>Buy my phsyical NFTs</h1>
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <Image src="/images/enjoyinglife.jpeg" alt="enjoying life" width={400} height={400} />
+          <div className={styles.card}>
+            <Image
+              src="/images/enjoyinglife.jpeg"
+              alt="enjoying life"
+              width={400}
+              height={400}
+            />
             <p>Very expensive art piece 1</p>
-          </a>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <Image src="/images/filter.JPG" alt="enjoying life" width={400} height={400} />
+            <button onClick={(() => {
+              checkout({
+                lineItems: [
+                  {
+                    price: "price_1LtcuKKHeBrFfwHueXwELDtF",
+                    quantity: 1,
+                  }
+                ]
+              });
+            })}>buy this swag</button>
+          </div>
+          <div className={styles.card}>
+            <Image
+              src="/images/filter.JPG"
+              alt="enjoying life"
+              width={400}
+              height={400}
+            />
             <p>Very expensive art piece 2</p>
-          </a>
+          </div>
         </div>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
     </div>
-  )
+  );
 }
